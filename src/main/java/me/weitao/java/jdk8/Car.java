@@ -1,6 +1,5 @@
 package me.weitao.java.jdk8;
 
-
 public class Car {
 
   public static Car create(final Supplier<Car> supplier) {

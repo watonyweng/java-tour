@@ -14,8 +14,10 @@ public class ConcurrentApp {
   private ExecutorService executor;
   private List<FutureTask<Long>> tasks = new ArrayList<FutureTask<Long>>();
 
-  public ConcurrentApp() {
+  private ConcurrentApp() {
+    // 返回Java虚拟机可用的处理器个数
     coreCpuNum = Runtime.getRuntime().availableProcessors();
+    // 创建线程数量的线程池
     executor = Executors.newFixedThreadPool(coreCpuNum);
   }
 
@@ -43,7 +45,7 @@ public class ConcurrentApp {
 
   public long sum(int[] numbers) throws ExecutionException {
     int start, end, increment;
-    // 根据CPU核心个数拆分任务，创建FutureTask并提交到Executor
+    // 根据CPU核心个数拆分任务，创建FutureTask并提交到线程池
     for (int i = 0; i < coreCpuNum; i++) {
       increment = numbers.length / coreCpuNum + 1;
       start = i * increment;
@@ -71,10 +73,6 @@ public class ConcurrentApp {
       }
     }
     return sum;
-  }
-
-  public void close() {
-    executor.shutdown();
   }
 
   public static void main(String[] args) {

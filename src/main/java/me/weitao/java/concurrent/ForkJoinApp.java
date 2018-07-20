@@ -7,12 +7,17 @@ import java.util.concurrent.RecursiveTask;
 
 public class ForkJoinApp extends RecursiveTask<Integer> {
 
-  public static final int THRESHOLD = 2;
-  private volatile static int count = 0;
+  private int threshold = Runtime.getRuntime().availableProcessors();
+  private static int count = 0;
   private int start;
   private int end;
 
-  public ForkJoinApp(int start, int end) {
+  /*
+   * 构造方法
+   * @param start
+   * @param end
+   */
+  private ForkJoinApp(int start, int end) {
     this.start = start;
     this.end = end;
   }
@@ -22,7 +27,8 @@ public class ForkJoinApp extends RecursiveTask<Integer> {
     int sum = 0;
     System.out.println("开启了一条线程单独干: " + count++);
     // 如果任务足够小, 就直接执行
-    boolean canCompute = (end - start) <= THRESHOLD;
+    boolean canCompute;
+    canCompute = (end - start) <= threshold;
     if (canCompute) {
       for (int i = start; i <= end; i++) {
         sum += i;
@@ -41,6 +47,11 @@ public class ForkJoinApp extends RecursiveTask<Integer> {
     return sum;
   }
 
+  /*
+   * 主方法
+   * @throws ExecutionException 执行异常
+   * @throws InterruptedException 中断异常
+   */
   public static void main(String[] args) throws ExecutionException, InterruptedException {
     ForkJoinPool forkJoinPool = new ForkJoinPool();
 

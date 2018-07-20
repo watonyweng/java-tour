@@ -9,9 +9,8 @@ import org.junit.Test;
  */
 public class AppTest {
 
-  /**
+  /*
    * assert function
-   * @return void
    */
   @Test
   public void shouldAnswerWithTrue() {
