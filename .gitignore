@@ -26,7 +26,7 @@
 /nbdist/
 /.nb-gradle/
 
-### Mac OS Directory ###
+### Mac OS Files ###
 .DS_Store
 .AppleDouble
 .LSOverride

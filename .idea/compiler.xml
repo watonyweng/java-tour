@@ -9,8 +9,5 @@
         <module name="java-tour" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="java-tour" target="10" />
-    </bytecodeTargetLevel>
   </component>
 </project>
