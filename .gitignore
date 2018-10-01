@@ -2,8 +2,21 @@
 /target/
 /out/
 !.mvn/wrapper/maven-wrapper.jar
+*.class
 
-### STS ###
+### Log Files ###
+*.log
+
+### Package Files ###
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+### STS Files ###
 .apt_generated
 .classpath
 .factorypath
@@ -12,13 +25,13 @@
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
+### IntelliJ IDEA Files ###
 .idea
 *.iws
 *.iml
 *.ipr
 
-### NetBeans ###
+### NetBeans Files ###
 /nbproject/private/
 /build/
 /nbbuild/
@@ -26,7 +39,7 @@
 /nbdist/
 /.nb-gradle/
 
-### Mac OS Files ###
+### mac OS Files ###
 .DS_Store
 .AppleDouble
 .LSOverride
