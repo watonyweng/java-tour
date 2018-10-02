@@ -1,24 +1,26 @@
 package me.weitao.java.concurrent;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.MessageFormat;
 import java.util.concurrent.Semaphore;
 
 /**
  * 存放线程共享信号量的上下文
  */
 class AppContext {
-    public static final int NUM_OF_FORKS = 5;   // 叉子数量(资源)
-    public static final int NUM_OF_PHILO = 5;   // 哲学家数量(线程)
+    static final int NUM_OF_FORKS = 5;   // 叉子数量(资源)
+    static final int NUM_OF_PHILO = 5;   // 哲学家数量(线程)
 
-    public static Semaphore[] forks;    // 叉子的信号量
-    public static Semaphore counter;    // 哲学家的信号量
+    static Semaphore[] forks;    // 叉子的信号量
+    static Semaphore counter;    // 哲学家的信号量
 
     static {
         forks = new Semaphore[NUM_OF_FORKS];
-
         for (int i = 0, len = forks.length; i < len; ++i) {
             forks[i] = new Semaphore(1);    // 每个叉子的信号量为1
         }
-
         counter = new Semaphore(NUM_OF_PHILO - 1);  // 如果有N个哲学家，最多只允许N-1人同时取叉子
     }
 
@@ -27,7 +29,7 @@ class AppContext {
      *
      * @param index     第几个哲学家
      * @param leftFirst 是否先取得左边的叉子
-     * @throws InterruptedException
+     * @throws InterruptedException 取得叉子中断
      */
     public static void putOnFork(int index, boolean leftFirst) throws InterruptedException {
         if (leftFirst) {
@@ -44,7 +46,7 @@ class AppContext {
      *
      * @param index     第几个哲学家
      * @param leftFirst 是否先放回左边的叉子
-     * @throws InterruptedException
+     * @throws InterruptedException 放回叉子中断
      */
     public static void putDownFork(int index, boolean leftFirst) throws InterruptedException {
         if (leftFirst) {
@@ -59,6 +61,7 @@ class AppContext {
 
 
 class Philosopher implements Runnable {
+    private static final Logger logger = LoggerFactory.getLogger(Philosopher.class);
     private int index;      // 编号
     private String name;    // 名字
 
@@ -74,7 +77,8 @@ class Philosopher implements Runnable {
                 AppContext.counter.acquire();
                 boolean leftFirst = index % 2 == 0;
                 AppContext.putOnFork(index, leftFirst);
-                System.out.println(name + "正在吃意大利面（通心粉）...");   // 取到两个叉子就可以进食
+                // 取到两个叉子就可以进食
+                logger.info(MessageFormat.format("{0}正在吃意大利面（通心粉）...", name));
                 AppContext.putDownFork(index, leftFirst);
                 AppContext.counter.release();
             } catch (InterruptedException e) {

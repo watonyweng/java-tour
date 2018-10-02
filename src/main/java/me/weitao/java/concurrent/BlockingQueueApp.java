@@ -1,5 +1,9 @@
 package me.weitao.java.concurrent;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.MessageFormat;
 import java.util.UUID;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutorService;
@@ -7,9 +11,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.LinkedBlockingQueue;
 
 class Constants {
-    public static final int MAX_BUFFER_SIZE = 10;
-    public static final int NUM_OF_PRODUCER = 2;
-    public static final int NUM_OF_CONSUMER = 3;
+    static final int MAX_BUFFER_SIZE = 10;
+    static final int NUM_OF_PRODUCER = 2;
+    static final int NUM_OF_CONSUMER = 3;
 }
 
 class Task {
@@ -26,6 +30,8 @@ class Task {
 }
 
 class Consumer implements Runnable {
+
+    private static final Logger logger = LoggerFactory.getLogger(Consumer.class);
     private BlockingQueue<Task> buffer;
 
     public Consumer(BlockingQueue<Task> buffer) {
@@ -37,15 +43,18 @@ class Consumer implements Runnable {
         while (true) {
             try {
                 Task task = buffer.take();
-                System.out.println("Consumer[" + Thread.currentThread().getName() + "] got " + task);
+                logger.info(MessageFormat.format("Consumer[{0}] get {1}",
+                        Thread.currentThread().getName(), task));
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
         }
     }
 }
 
 class Producer implements Runnable {
+
+    private static final Logger logger = LoggerFactory.getLogger(Producer.class);
     private BlockingQueue<Task> buffer;
 
     public Producer(BlockingQueue<Task> buffer) {
@@ -58,17 +67,18 @@ class Producer implements Runnable {
             try {
                 Task task = new Task();
                 buffer.put(task);
-                System.out.println("Producer[" + Thread.currentThread().getName() + "] put " + task);
+                logger.info(MessageFormat.format("Producer[{0}] put {1}",
+                        Thread.currentThread().getName(), task));
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                logger.error(e.getMessage());
             }
-
         }
     }
 
 }
 
 public class BlockingQueueApp {
+
     public static void main(String[] args) {
         BlockingQueue<Task> buffer = new LinkedBlockingQueue<>(Constants.MAX_BUFFER_SIZE);
         ExecutorService es = Executors.newFixedThreadPool(Constants.NUM_OF_CONSUMER + Constants.NUM_OF_PRODUCER);

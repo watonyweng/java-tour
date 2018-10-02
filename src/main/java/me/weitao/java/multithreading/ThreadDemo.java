@@ -1,39 +1,44 @@
 package me.weitao.java.multithreading;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.MessageFormat;
 import java.util.stream.IntStream;
 
 class ThreadDemo extends Thread {
 
-  private Thread thread;
-  private String threadName;
+    private static final Logger logger = LoggerFactory.getLogger(ThreadDemo.class);
+    private Thread thread;
+    private String threadName;
 
-  ThreadDemo(String name) {
-    threadName = name;
-    System.out.println("Creating " + threadName);
-  }
-
-  @Override
-  public void run() {
-    System.out.println("Running " + threadName);
-    IntStream.range(1, 5)
-      .forEach(i -> {
-          try {
-            System.out.println("Thread: " + threadName + " -> " + i);
-            // 让线程睡眠一会
-            Thread.sleep(50);
-          } catch (InterruptedException e) {
-            System.out.println("Thread " + threadName + " interrupted.");
-          }
-        }
-      );
-    System.out.println("Thread " + threadName + " exiting.");
-  }
-
-  public void start() {
-    System.out.println("Starting " + threadName);
-    if (thread == null) {
-      thread = new Thread(this, threadName);
-      thread.start();
+    ThreadDemo(String name) {
+        threadName = name;
+        logger.info(MessageFormat.format("Creating {0}", threadName));
     }
-  }
+
+    @Override
+    public void run() {
+        logger.info(MessageFormat.format("Running {0}", threadName));
+        IntStream.range(1, 5)
+                .forEach(i -> {
+                            try {
+                                logger.info(MessageFormat.format("Thread: {0} -> {1}", threadName, i));
+                                // 让线程睡眠一会
+                                Thread.sleep(50);
+                            } catch (InterruptedException e) {
+                                logger.error(MessageFormat.format("Thread: {0} interrupted.", threadName));
+                            }
+                        }
+                );
+        logger.info(MessageFormat.format("Thread {0} exiting.", threadName));
+    }
+
+    public void start() {
+        logger.info(MessageFormat.format("Starting {0}", threadName));
+        if (thread == null) {
+            thread = new Thread(this, threadName);
+            thread.start();
+        }
+    }
 }

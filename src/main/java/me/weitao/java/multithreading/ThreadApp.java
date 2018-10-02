@@ -2,11 +2,11 @@ package me.weitao.java.multithreading;
 
 public class ThreadApp {
 
-  public static void main(String args[]) {
-    ThreadDemo t1 = new ThreadDemo("Thread-1");
-    t1.start();
+    public static void main(String args[]) {
+        ThreadDemo threadDemo1 = new ThreadDemo("Thread-1");
+        threadDemo1.start();
 
-    ThreadDemo t2 = new ThreadDemo("Thread-2");
-    t2.start();
-  }
+        ThreadDemo threadDemo2 = new ThreadDemo("Thread-2");
+        threadDemo2.start();
+    }
 }
