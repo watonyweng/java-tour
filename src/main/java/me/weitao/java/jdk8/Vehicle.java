@@ -1,12 +1,18 @@
 package me.weitao.java.jdk8;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 interface Vehicle {
 
-  default void print() {
-    System.out.println("我是一辆车!");
-  }
+    Logger LOGGER = LoggerFactory.getLogger(Vehicle.class);
 
-  static void blowHorn() {
-    System.out.println("按喇叭!!!!!");
-  }
+    default void print() {
+        LOGGER.info("我是一辆车");
+    }
+
+    static void blowHorn() {
+        LOGGER.info("按喇叭啦");
+    }
+
 }

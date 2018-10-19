@@ -7,7 +7,7 @@
         </encoder>
     </appender>
 
-    <logger name="me.weitao" level="TRACE"/>
+    <logger name="me.weitao.java" level="TRACE"/>
 
     <root level="debug">
         <appender-ref ref="STDOUT"/>

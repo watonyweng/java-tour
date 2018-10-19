@@ -1,4 +1,4 @@
-package me.weitao.java.jdk10;
+package me.weitao.java.jdk11;
 
 final class LogOracle implements Logging {
 

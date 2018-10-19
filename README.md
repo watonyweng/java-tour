@@ -4,8 +4,13 @@ This project was generated with [java](https://www.java.com/en) using [maven](ht
 
 ## Environment
 
-- Java
-- Git
+- [Java](https://www.java.com/en)
+- [Git](https://git-scm.com)
+
+## Minimum Requirements
+
+- JDK 8+ 
+- Git 2+
 
 ## Installation
 

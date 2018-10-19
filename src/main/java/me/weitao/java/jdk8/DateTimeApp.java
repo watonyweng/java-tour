@@ -1,5 +1,9 @@
 package me.weitao.java.jdk8;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.text.MessageFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -7,39 +11,34 @@ import java.time.Month;
 
 public class DateTimeApp {
 
-  public static void main(String args[]) {
-    DateTimeApp dateTimeApp = new DateTimeApp();
-    dateTimeApp.testLocalDateTime();
-  }
+    private static final Logger logger = LoggerFactory.getLogger(DateTimeApp.class);
 
-  public void testLocalDateTime() {
+    public static void main(String[] args) {
+        DateTimeApp.getLocalDateTime();
+    }
 
-    // 获取当前的日期时间
-    LocalDateTime currentTime = LocalDateTime.now();
-    System.out.println("当前时间: " + currentTime);
+    private static void getLocalDateTime() {
+        // 获取当前的日期时间
+        LocalDateTime currentTime = LocalDateTime.now();
+        logger.info(MessageFormat.format("当前时间: {0}", currentTime));
 
-    LocalDate date1 = currentTime.toLocalDate();
-    System.out.println("date1: " + date1);
+        LocalDate currentDate = currentTime.toLocalDate();
+        logger.info(MessageFormat.format("当前日期: {0}", currentDate));
 
-    Month month = currentTime.getMonth();
-    int day = currentTime.getDayOfMonth();
-    int seconds = currentTime.getSecond();
+        // 根据当前时间设置日期
+        LocalDateTime customDate = currentTime.withDayOfMonth(10).withYear(2012);
+        logger.info(MessageFormat.format("根据给定时间设置日期：{0}", customDate));
 
-    System.out.println("月: " + month + ", 日: " + day + ", 秒: " + seconds);
+        // 设置日期
+        LocalDate date = LocalDate.of(2018, Month.DECEMBER, 6);
+        logger.info(MessageFormat.format("设置日期：{0}", date));
 
-    LocalDateTime date2 = currentTime.withDayOfMonth(10).withYear(2012);
-    System.out.println("date2: " + date2);
+        // 设置时间
+        LocalTime time = LocalTime.of(22, 15);
+        logger.info(MessageFormat.format("设置时间：{0}", time));
 
-    // 12 december 2018
-    LocalDate date3 = LocalDate.of(2018, Month.DECEMBER, 6);
-    System.out.println("date3: " + date3);
-
-    // 22 小时 15 分钟
-    LocalTime date4 = LocalTime.of(22, 15);
-    System.out.println("date4: " + date4);
-
-    // 解析字符串
-    LocalTime date5 = LocalTime.parse("20:15:30");
-    System.out.println("date5: " + date5);
-  }
+        // 解析时间字符串
+        LocalTime localTime = LocalTime.parse("20:15:30");
+        logger.info(MessageFormat.format("解析时间：{0}", localTime));
+    }
 }

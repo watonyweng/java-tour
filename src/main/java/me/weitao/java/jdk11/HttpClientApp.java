@@ -8,10 +8,11 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.text.MessageFormat;
 
 public class HttpClientApp {
 
-    public static final Logger logger = LoggerFactory.getLogger(HttpClientApp.class);
+    private static final Logger logger = LoggerFactory.getLogger(HttpClientApp.class);
 
     public static void main(String[] args) throws IOException, InterruptedException {
         var request = HttpRequest.newBuilder()
@@ -19,6 +20,6 @@ public class HttpClientApp {
                 .build();
         var client = HttpClient.newHttpClient();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        System.out.println(response.body());
+        logger.info(MessageFormat.format("Response Content : {0}", response.body()));
     }
 }

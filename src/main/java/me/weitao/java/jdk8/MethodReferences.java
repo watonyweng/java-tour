@@ -6,28 +6,28 @@ import java.util.List;
 
 public class MethodReferences {
 
-  public static void main(String args[]) {
-    List names = new ArrayList();
+    public static void main(String args[]) {
+        List<String> names = new ArrayList<>();
 
-    names.add("Google");
-    names.add("TaoBao");
-    names.add("BaiBu");
-    names.add("SoHu");
+        names.add("Google");
+        names.add("TaoBao");
+        names.add("BaiBu");
+        names.add("SoHu");
 
-    names.forEach(System.out::println);
+        names.forEach(System.out::println);
 
-    // 构造器引用
-    final Car car = Car.create(Car::new);
-    final List<Car> cars = Arrays.asList(car);
+        // 构造器引用
+        final Car car = Car.create(Car::new);
+        final List<Car> cars = Arrays.asList(car);
 
-    // 静态方法引用
-    cars.forEach(Car::collide);
+        // 静态方法引用
+        cars.forEach(Car::collide);
 
-    // 特定类的任意对象的方法引用
-    cars.forEach(Car::repair);
+        // 特定类的任意对象的方法引用
+        cars.forEach(Car::repair);
 
-    // 特定对象的方法引用
-    final Car police = Car.create(Car::new);
-    cars.forEach(police::follow);
-  }
+        // 特定对象的方法引用
+        final Car police = Car.create(Car::new);
+        cars.forEach(police::follow);
+    }
 }
