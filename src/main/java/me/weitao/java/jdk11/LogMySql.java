@@ -9,11 +9,12 @@ import java.text.MessageFormat;
  * @date 2018-11-30
  */
 
-final class LogOracle implements Logging {
+final class LogMySql implements Logging {
+
     @Override
     public void logInfo(String message) {
         if (logger.isInfoEnabled()) {
-            logger.info(MessageFormat.format("Message is {0} for {1}", message, DatabaseType.OracleDb));
+            logger.info(MessageFormat.format("Message is {0} for {1}", message, DatabaseType.MysqlDb));
         }
     }
 }

@@ -13,6 +13,13 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
 
+/**
+ * 显示多分辨率的图片
+ *
+ * @author Watony Weng
+ * @date 2018-11-30
+ */
+
 public class MultiSolutionImage {
 
     private static final Logger logger = LoggerFactory.getLogger(MultiSolutionImage.class);
@@ -24,7 +31,7 @@ public class MultiSolutionImage {
                         "http://www.runoob.com/wp-content/themes/runoob/assets/img/runoob-logo.png",
                         "http://www.runoob.com/wp-content/themes/runoob/assets/images/qrcode.png");
 
-        List<Image> images = new ArrayList<Image>();
+        List<Image> images = new ArrayList<>();
         for (String url : imgUrls) {
             images.add(ImageIO.read(new URL(url)));
         }
@@ -35,27 +42,38 @@ public class MultiSolutionImage {
 
         // 获取图片的所有分辨率
         List<Image> variants = multiResolutionImage.getResolutionVariants();
+        if (logger.isInfoEnabled()) {
+            logger.info(MessageFormat.format("Total number of images: {0}", variants.size()));
+        }
 
-        logger.info(MessageFormat.format("Total number of images: {0}", variants.size()));
         for (Image img : variants) {
             logger.info(MessageFormat.format("{0}", img));
         }
 
         // 根据不同尺寸获取对应的图像分辨率
         Image variant1 = multiResolutionImage.getResolutionVariant(156, 45);
-        logger.info(MessageFormat.format("Image for destination [{0},{1}] : [{2},{3}]", 156, 45,
-                variant1.getWidth(null), variant1.getHeight(null)));
+        if (logger.isInfoEnabled()) {
+            logger.info(MessageFormat.format("Image for destination [{0},{1}] : [{2},{3}]", 156, 45,
+                    variant1.getWidth(null), variant1.getHeight(null)));
+        }
 
         Image variant2 = multiResolutionImage.getResolutionVariant(311, 89);
-        logger.info(MessageFormat.format("Image for destination [{0},{1}] : [{2},{3}]", 311, 89,
-                variant2.getWidth(null), variant2.getHeight(null)));
+        if (logger.isInfoEnabled()) {
+            logger.info(MessageFormat.format("Image for destination [{0},{1}] : [{2},{3}]", 311, 89,
+                    variant2.getWidth(null), variant2.getHeight(null)));
+        }
 
         Image variant3 = multiResolutionImage.getResolutionVariant(622, 178);
-        logger.info(MessageFormat.format("Image for destination [{0},{1}] : [{2},{3}]", 622, 178,
-                variant3.getWidth(null), variant3.getHeight(null)));
+        if (logger.isInfoEnabled()) {
+            logger.info(MessageFormat.format("Image for destination [{0},{1}] : [{2},{3}]", 622, 178,
+                    variant3.getWidth(null), variant3.getHeight(null)));
+        }
 
         Image variant4 = multiResolutionImage.getResolutionVariant(300, 300);
-        logger.info(MessageFormat.format("Image for destination [{0},{1}] : [{2},{3}]", 300, 300,
-                variant4.getWidth(null), variant4.getHeight(null)));
+        if (logger.isInfoEnabled()) {
+            logger.info(MessageFormat.format("Image for destination [{0},{1}] : [{2},{3}]", 300, 300,
+                    variant4.getWidth(null), variant4.getHeight(null)));
+        }
+
     }
 }

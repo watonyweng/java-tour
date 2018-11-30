@@ -9,8 +9,8 @@ This project was generated with [java](https://www.java.com/en) using [maven](ht
 
 ## Minimum Requirements
 
-- JDK 8+ 
-- Git 2+
+- JDK 1.8+ 
+- Git 2.0+
 
 ## Installation
 
@@ -24,6 +24,10 @@ This project was generated with [java](https://www.java.com/en) using [maven](ht
 ## Package
 
 - mvn clean package
+
+## Coding Guidelines
+
+- [Alibaba Java Coding Guidelines](https://github.com/alibaba/p3c)
 
 ## License
 
