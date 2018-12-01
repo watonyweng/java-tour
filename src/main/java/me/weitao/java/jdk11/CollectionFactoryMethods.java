@@ -13,7 +13,7 @@ import java.util.Set;
  * 集合工厂方法
  *
  * @author Watony Weng
- * @date 2018-11-30
+ * @date 2018/11/30
  */
 
 public class CollectionFactoryMethods {

@@ -6,7 +6,7 @@ import java.text.MessageFormat;
  * MySQL日志实现
  *
  * @author Watony Weng
- * @date 2018-11-30
+ * @date 2018/11/30
  */
 
 final class LogMySql implements Logging {

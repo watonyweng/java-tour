@@ -17,7 +17,7 @@ import javax.imageio.ImageIO;
  * 显示多分辨率的图片
  *
  * @author Watony Weng
- * @date 2018-11-30
+ * @date 2018/11/30
  */
 
 public class MultiSolutionImage {
@@ -47,7 +47,9 @@ public class MultiSolutionImage {
         }
 
         for (Image img : variants) {
-            logger.info(MessageFormat.format("{0}", img));
+            if (logger.isInfoEnabled()) {
+                logger.info(MessageFormat.format("{0}", img));
+            }
         }
 
         // 根据不同尺寸获取对应的图像分辨率

@@ -13,7 +13,7 @@ import java.util.stream.Stream;
  * 获取进程信息
  *
  * @author Watony Weng
- * @date 2018-11-30
+ * @date 2018/11/30
  */
 
 public class ProcessApp {

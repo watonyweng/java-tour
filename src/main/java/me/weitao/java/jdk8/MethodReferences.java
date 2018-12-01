@@ -1,12 +1,24 @@
 package me.weitao.java.jdk8;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * 方法引用
+ *
+ * @author Watony Weng
+ * @date 2018/12/01
+ */
+
 public class MethodReferences {
 
-    public static void main(String args[]) {
+    private static final Logger logger = LoggerFactory.getLogger(MethodReferences.class);
+
+    public static void main(String[] args) {
         List<String> names = new ArrayList<>();
 
         names.add("Google");
@@ -14,7 +26,7 @@ public class MethodReferences {
         names.add("BaiBu");
         names.add("SoHu");
 
-        names.forEach(System.out::println);
+        names.forEach(logger::info);
 
         // 构造器引用
         final Car car = Car.create(Car::new);

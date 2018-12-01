@@ -8,6 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
+/**
+ * 函数式接口示例
+ *
+ * @author Watony Weng
+ * @date 2018/12/01
+ */
+
 public class FunctionalInterfaces {
 
     private static final Logger logger = LoggerFactory.getLogger(FunctionalInterfaces.class);
@@ -27,7 +34,7 @@ public class FunctionalInterfaces {
 
     private static void eval(List<Integer> list, Predicate<Integer> predicate) {
         for (Integer n : list) {
-            if (predicate.test(n)) {
+            if (predicate.test(n) && logger.isInfoEnabled()) {
                 logger.info(MessageFormat.format("{0} ", n));
             }
         }

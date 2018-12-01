@@ -14,7 +14,7 @@ import java.text.MessageFormat;
  * Http客户端使用
  *
  * @author Watony Weng
- * @date 2018-11-30
+ * @date 2018/11/30
  */
 
 public class HttpClientApp {

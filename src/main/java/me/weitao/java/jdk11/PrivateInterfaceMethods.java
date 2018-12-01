@@ -4,7 +4,7 @@ package me.weitao.java.jdk11;
  * 私有接口方法
  *
  * @author Watony Weng
- * @date 2018-11-30
+ * @date 2018/11/30
  */
 
 public class PrivateInterfaceMethods {

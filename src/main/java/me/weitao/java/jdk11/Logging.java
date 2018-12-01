@@ -9,7 +9,7 @@ import java.text.MessageFormat;
  * 日志接口
  *
  * @author Watony Weng
- * @date 2018-11-30
+ * @date 2018/11/30
  */
 
 public interface Logging {
