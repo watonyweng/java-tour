@@ -1,16 +1,28 @@
 package me.weitao.java.concurrent;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.text.MessageFormat;
-import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.*;
 
+/**
+ * 工作
+ *
+ * @author Watony Weng
+ * @date 2018/12/03
+ */
+
+@Slf4j
 class Worker {
-
-    private static final Logger logger = LoggerFactory.getLogger(Worker.class);
-    private String name;        // 名字
-    private long workDuration;  // 工作持续时间
+    /**
+     * 名字
+     */
+    private String name;
+    /**
+     * 工作持续时间
+     */
+    private long workDuration;
 
     /**
      * 构造器
@@ -24,15 +36,24 @@ class Worker {
      * 完成工作
      */
     public void doWork() {
-        logger.info(MessageFormat.format("{0} begins to work...", name));
+        log.info(MessageFormat.format("{0} begins to work...", name));
         try {
-            Thread.sleep(workDuration); // 用休眠模拟工作执行的时间
+            // 用休眠模拟工作执行的时间
+            Thread.sleep(workDuration);
         } catch (InterruptedException ex) {
-            ex.printStackTrace();
+            log.error(ex.getLocalizedMessage());
+            Thread.currentThread().interrupt();
         }
-        logger.info(MessageFormat.format("{0} has finished the job...", name));
+        log.info(MessageFormat.format("{0} has finished the job...", name));
     }
 }
+
+/**
+ * 工作线程
+ *
+ * @author Watony Weng
+ * @date 2018/12/03
+ */
 
 class WorkerThread implements Runnable {
 
@@ -46,35 +67,63 @@ class WorkerThread implements Runnable {
 
     @Override
     public void run() {
-        worker.doWork();        // 让工人开始工作
-        cdLatch.countDown();    // 工作完成后倒计时次数减1
+        // 让工人开始工作
+        worker.doWork();
+        // 工作完成后倒计时次数减1
+        cdLatch.countDown();
     }
 }
 
+/**
+ * CountDownLatch示例
+ *
+ * @author Watony Weng
+ * @date 2018/12/03
+ */
+
+@Slf4j
 public class CountDownLatchApp {
 
-    private static final Logger logger = LoggerFactory.getLogger(CountDownLatchApp.class);
-    private static final int MAX_WORK_DURATION = 5000;  // 最大工作时间
-    private static final int MIN_WORK_DURATION = 1000;  // 最小工作时间
+    /**
+     * 最大工作时间
+     */
+    private static final int MAX_WORK_DURATION = 5000;
+    /**
+     * 最小工作时间
+     */
+    private static final int MIN_WORK_DURATION = 1000;
 
-    // 产生随机的工作时间
+    /**
+     * 产生随机的工作时间
+     *
+     * @return long 工作时间
+     */
     private static long getRandomWorkDuration() {
         return (long) (Math.random() * (MAX_WORK_DURATION - MIN_WORK_DURATION) + MIN_WORK_DURATION);
     }
 
     public static void main(String[] args) {
-        CountDownLatch countDownLatch = new CountDownLatch(2);   // 创建倒计时闩并指定倒计时次数为2
+        // 创建倒计时并指定倒计时次数为2
+        CountDownLatch countDownLatch = new CountDownLatch(2);
         Worker w1 = new Worker("王者", getRandomWorkDuration());
         Worker w2 = new Worker("荣耀", getRandomWorkDuration());
 
-        new Thread(new WorkerThread(w1, countDownLatch)).start();
-        new Thread(new WorkerThread(w2, countDownLatch)).start();
-
+        // 构建线程工厂
+        ThreadFactory threadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("thread-pool-%d").build();
+        // 创建线程池
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(5, 10, 5,
+                TimeUnit.SECONDS, new SynchronousQueue<>(), threadFactory);
+        // 执行线程
+        threadPoolExecutor.execute(new WorkerThread(w1, countDownLatch));
+        threadPoolExecutor.execute(new WorkerThread(w2, countDownLatch));
         try {
-            countDownLatch.await();  // 等待倒计时减到0
-            logger.info("All jobs have been finished...");
+            // 等待倒计时减到0
+            countDownLatch.await();
+            log.info("All jobs have been finished...");
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            log.error(e.getLocalizedMessage());
+            Thread.currentThread().interrupt();
         }
     }
 }

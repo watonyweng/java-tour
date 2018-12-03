@@ -1,14 +1,10 @@
 package me.weitao.java.concurrent;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.text.MessageFormat;
 import java.util.UUID;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.*;
 
 class Constants {
     static final int MAX_BUFFER_SIZE = 10;
@@ -16,8 +12,17 @@ class Constants {
     static final int NUM_OF_CONSUMER = 3;
 }
 
+/**
+ * 任务
+ *
+ * @author Watony Weng
+ * @date 2018/12/03
+ */
 class Task {
-    private String id;  // 任务编号
+    /**
+     * 任务编号
+     */
+    private String id;
 
     public Task() {
         id = UUID.randomUUID().toString();
@@ -29,9 +34,16 @@ class Task {
     }
 }
 
+/**
+ * 消费者
+ *
+ * @author Watony Weng
+ * @date 2018/12/03
+ */
+
+@Slf4j
 class Consumer implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger(Consumer.class);
     private BlockingQueue<Task> buffer;
 
     public Consumer(BlockingQueue<Task> buffer) {
@@ -43,18 +55,26 @@ class Consumer implements Runnable {
         while (true) {
             try {
                 Task task = buffer.take();
-                logger.info(MessageFormat.format("Consumer[{0}] get {1}",
+                log.info(MessageFormat.format("Consumer[{0}] get {1}",
                         Thread.currentThread().getName(), task));
             } catch (InterruptedException e) {
-                logger.error(e.getMessage());
+                log.error(e.getLocalizedMessage());
+                Thread.currentThread().interrupt();
             }
         }
     }
 }
 
+/**
+ * 生产者
+ *
+ * @author Watony Weng
+ * @date 2018/12/03
+ */
+
+@Slf4j
 class Producer implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger(Producer.class);
     private BlockingQueue<Task> buffer;
 
     public Producer(BlockingQueue<Task> buffer) {
@@ -67,26 +87,33 @@ class Producer implements Runnable {
             try {
                 Task task = new Task();
                 buffer.put(task);
-                logger.info(MessageFormat.format("Producer[{0}] put {1}",
+                log.info(MessageFormat.format("Producer[{0}] put {1}",
                         Thread.currentThread().getName(), task));
             } catch (InterruptedException e) {
-                logger.error(e.getMessage());
+                log.error(e.getLocalizedMessage());
+                Thread.currentThread().interrupt();
             }
         }
     }
 
 }
 
+/**
+ * 阻塞队列
+ *
+ * @author Watony Weng
+ * @date 2018/12/03
+ */
 public class BlockingQueueApp {
 
     public static void main(String[] args) {
         BlockingQueue<Task> buffer = new LinkedBlockingQueue<>(Constants.MAX_BUFFER_SIZE);
-        ExecutorService es = Executors.newFixedThreadPool(Constants.NUM_OF_CONSUMER + Constants.NUM_OF_PRODUCER);
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(Constants.NUM_OF_CONSUMER + Constants.NUM_OF_PRODUCER);
         for (int i = 1; i <= Constants.NUM_OF_PRODUCER; ++i) {
-            es.execute(new Producer(buffer));
+            scheduledExecutorService.execute(new Producer(buffer));
         }
         for (int i = 1; i <= Constants.NUM_OF_CONSUMER; ++i) {
-            es.execute(new Consumer(buffer));
+            scheduledExecutorService.execute(new Consumer(buffer));
         }
     }
 }

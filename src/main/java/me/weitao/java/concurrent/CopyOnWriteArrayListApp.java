@@ -1,18 +1,24 @@
 package me.weitao.java.concurrent;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+import lombok.extern.slf4j.Slf4j;
 
 import java.text.MessageFormat;
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
+/**
+ * 随机数线程
+ *
+ * @author Watony Weng
+ * @date 2018/12/03
+ */
+
+@Slf4j
 class RandomThread implements Runnable {
 
-    private static final Logger logger = LoggerFactory.getLogger(RandomThread.class);
     private List<Double> list;
+    private final int SIZE = 10000;
 
     public RandomThread(List<Double> list) {
         this.list = list;
@@ -20,24 +26,38 @@ class RandomThread implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < 10000; ++i) {
+        for (int i = 0; i < SIZE; ++i) {
             double random = Math.random();
             list.add(random);
-            logger.info(MessageFormat.format("random => {0}", random));
+            log.info(MessageFormat.format("random => {0}", random));
         }
     }
 
 }
 
+/**
+ * 复制写入示例
+ *
+ * @author Watony Weng
+ * @date 2018/12/03
+ */
 public class CopyOnWriteArrayListApp {
 
     private static final int THREAD_POOL_SIZE = 2;
 
     public static void main(String[] args) {
         List<Double> list = new CopyOnWriteArrayList<>();
-        ExecutorService es = Executors.newFixedThreadPool(THREAD_POOL_SIZE);
-        es.execute(new RandomThread(list));
-        es.execute(new RandomThread(list));
-        es.shutdown();
+        // 创建线程工厂
+        ThreadFactory threadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("thread-pool-%d").build();
+        // 创建线程池
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(THREAD_POOL_SIZE, 10,
+                5, TimeUnit.SECONDS, new SynchronousQueue<>(), threadFactory);
+        for (int i = 0; i < THREAD_POOL_SIZE; i++) {
+            // 执行线程
+            threadPoolExecutor.execute(new RandomThread(list));
+        }
+        // 关闭线程池
+        threadPoolExecutor.shutdown();
     }
 }
