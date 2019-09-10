@@ -39,7 +39,7 @@
 /nbdist/
 /.nb-gradle/
 
-### mac OS Files ###
+### macOS Files ###
 .DS_Store
 .AppleDouble
 .LSOverride
