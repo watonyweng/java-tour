@@ -1,10 +1,10 @@
-# java-tour
+# jnf-tour
 
-This project was generated with [java](https://www.java.com/en) using [maven](https://github.com/apache/maven).
+This project was generated with [java](https://openjdk.java.net) using [maven](https://github.com/apache/maven).
 
 ## Environment
 
-- [Java](https://www.java.com/en)
+- [Java](https://www.java.com)
 - [Git](https://git-scm.com)
 
 ## Minimum Requirements
@@ -14,8 +14,8 @@ This project was generated with [java](https://www.java.com/en) using [maven](ht
 
 ## Installation
 
-- git clone https://github.com/watonyweng/java-tour.git
-- cd java-tour && mvn clean install
+- git clone <https://github.com/watonyweng/jnf-tour.git>
+- cd jnf-tour && mvn clean install
 
 ## Compile
 
@@ -31,4 +31,4 @@ This project was generated with [java](https://www.java.com/en) using [maven](ht
 
 ## License
 
-- java-tour is released under an [MIT](https://opensource.org/licenses/MIT) license. See [LICENSE](https://github.com/watonyweng/java-tour/tree/master/LICENSE) for more information.
+- jnf-tour is released under an [MIT](https://opensource.org/licenses/MIT) license. See [LICENSE](https://github.com/watonyweng/jnf-tour/tree/master/LICENSE) for more information.

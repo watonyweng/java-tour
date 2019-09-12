@@ -6,13 +6,14 @@
     <artifactId>java-tour</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <name>java-tour</name>
-    <url>https://weitao.me</url>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>11</java.version>
         <dockerfile.version>1.4.12</dockerfile.version>
     </properties>
+    
     <dependencies>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -87,7 +88,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>dockertour</repository>
+                    <repository>jnfguide</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>
