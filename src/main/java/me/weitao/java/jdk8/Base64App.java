@@ -46,6 +46,6 @@ public class Base64App {
         if (logger.isInfoEnabled()) {
             logger.info(MessageFormat.format("Base64编码字符串(MIME): {0}", mimeEncodedString));
         }
-
     }
+
 }

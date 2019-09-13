@@ -9,10 +9,12 @@ package me.weitao.java.jdk8;
 
 @FunctionalInterface
 interface Supplier<T> {
+
     /**
      * 获取数据
      *
      * @return 泛型数据
      */
     T get();
+
 }

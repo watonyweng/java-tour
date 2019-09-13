@@ -47,3 +47,6 @@ Icon
 ._*
 .Spotlight-V100
 .Trashes
+
+### Java Version Files for jEnv ###
+.java-version

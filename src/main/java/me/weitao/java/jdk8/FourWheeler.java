@@ -20,4 +20,5 @@ interface FourWheeler {
     default void print() {
         LOGGER.info("我是一辆四轮车");
     }
+
 }

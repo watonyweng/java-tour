@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * 函数式接口示例
+ * 函数式接口
  *
  * @author Watony Weng
  * @date 2018/12/01
@@ -39,4 +39,5 @@ public class FunctionalInterfaces {
             }
         }
     }
+
 }

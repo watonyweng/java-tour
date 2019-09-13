@@ -32,4 +32,5 @@ public class NashornApp {
             logger.info(MessageFormat.format("脚本执行结果 : {0}", result));
         }
     }
+
 }

@@ -13,4 +13,5 @@ public class DefaultMethods {
         Vehicle vehicle = new PonyCar();
         vehicle.print();
     }
+
 }

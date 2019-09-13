@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.concurrent.*;
 
 /**
- * 求和计算
+ * 求和计算器
  *
  * @author Watony Weng
  * @date 2018/12/03
@@ -71,5 +71,6 @@ public class SumCalculator implements Callable<Long> {
         }
         return sum;
     }
+
 }
 

@@ -36,11 +36,12 @@ class RandomThread implements Runnable {
 }
 
 /**
- * 复制写入示例
+ * 复制写入对象
  *
  * @author Watony Weng
  * @date 2018/12/03
  */
+
 public class CopyOnWriteArrayListApp {
 
     private static final int THREAD_POOL_SIZE = 2;
@@ -60,4 +61,5 @@ public class CopyOnWriteArrayListApp {
         // 关闭线程池
         threadPoolExecutor.shutdown();
     }
+
 }

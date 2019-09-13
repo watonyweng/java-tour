@@ -62,4 +62,5 @@ public class DateTimeApp {
             logger.info(MessageFormat.format("解析时间：{0}", localTime));
         }
     }
+
 }

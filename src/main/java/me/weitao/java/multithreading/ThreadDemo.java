@@ -15,9 +15,21 @@ import java.util.stream.IntStream;
 @Slf4j
 class ThreadDemo extends Thread {
 
+    /**
+     * 线程对象
+     */
     private Thread thread;
+
+    /**
+     * 线程名称
+     */
     private String threadName;
 
+    /**
+     * 构造方法
+     *
+     * @param name 名称
+     */
     ThreadDemo(String name) {
         this.threadName = name;
         log.info(MessageFormat.format("Creating {0}", threadName));
@@ -52,4 +64,5 @@ class ThreadDemo extends Thread {
         }
 
     }
+
 }

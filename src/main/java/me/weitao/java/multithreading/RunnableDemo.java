@@ -14,9 +14,21 @@ import java.text.MessageFormat;
 @Slf4j
 class RunnableDemo implements Runnable {
 
+    /**
+     * 线程对象
+     */
     private Thread thread;
+
+    /**
+     * 线程名称
+     */
     private String threadName;
 
+    /**
+     * 构造方法
+     *
+     * @param name 名称
+     */
     RunnableDemo(String name) {
         threadName = name;
         log.info(MessageFormat.format("Creating {0}", threadName));
@@ -45,4 +57,5 @@ class RunnableDemo implements Runnable {
             thread.start();
         }
     }
+
 }

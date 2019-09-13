@@ -9,7 +9,7 @@ import java.util.concurrent.ForkJoinTask;
 import java.util.concurrent.RecursiveTask;
 
 /**
- * 并发
+ * 并发对象
  *
  * @author Watony Weng
  * @date 2018/12/03
@@ -73,4 +73,5 @@ public class ForkJoinApp extends RecursiveTask<Integer> {
         ForkJoinTask<Integer> result = forkJoinPool.submit(forkJoinApp);
         log.info(MessageFormat.format("result => {0}", result.get()));
     }
+
 }

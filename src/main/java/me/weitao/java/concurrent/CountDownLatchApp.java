@@ -15,10 +15,12 @@ import java.util.concurrent.*;
 
 @Slf4j
 class Worker {
+
     /**
      * 名字
      */
     private String name;
+    
     /**
      * 工作持续时间
      */
@@ -72,10 +74,11 @@ class WorkerThread implements Runnable {
         // 工作完成后倒计时次数减1
         cdLatch.countDown();
     }
+
 }
 
 /**
- * CountDownLatch示例
+ * CountDownLatch
  *
  * @author Watony Weng
  * @date 2018/12/03
@@ -88,6 +91,7 @@ public class CountDownLatchApp {
      * 最大工作时间
      */
     private static final int MAX_WORK_DURATION = 5000;
+
     /**
      * 最小工作时间
      */
@@ -126,4 +130,5 @@ public class CountDownLatchApp {
             Thread.currentThread().interrupt();
         }
     }
+
 }

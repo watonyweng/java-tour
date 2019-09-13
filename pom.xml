@@ -3,17 +3,17 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.weitao.java</groupId>
-    <artifactId>java-tour</artifactId>
+    <artifactId>jnf-tour</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>java-tour</name>
+    <name>jnf-tour</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>1.8</java.version>
         <dockerfile.version>1.4.12</dockerfile.version>
     </properties>
-    
+
     <dependencies>
         <dependency>
             <groupId>ch.qos.logback</groupId>
@@ -55,6 +55,10 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

@@ -86,4 +86,5 @@ public class LambdaExpressions {
         greetService1.sayMessage("BaiDu");
         greetService2.sayMessage("Google");
     }
+
 }

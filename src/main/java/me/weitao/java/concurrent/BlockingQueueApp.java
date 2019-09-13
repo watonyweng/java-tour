@@ -6,10 +6,30 @@ import java.text.MessageFormat;
 import java.util.UUID;
 import java.util.concurrent.*;
 
+/**
+ * 常量
+ *
+ * @author Watony Weng
+ * @date 2019/09/13
+ */
+
 class Constants {
+
+    /**
+     * 缓冲区大小
+     */
     static final int MAX_BUFFER_SIZE = 10;
+
+    /**
+     * 生产者数量
+     */
     static final int NUM_OF_PRODUCER = 2;
+
+    /**
+     * 消费者数量
+     */
     static final int NUM_OF_CONSUMER = 3;
+
 }
 
 /**
@@ -18,7 +38,9 @@ class Constants {
  * @author Watony Weng
  * @date 2018/12/03
  */
+
 class Task {
+
     /**
      * 任务编号
      */
@@ -32,6 +54,7 @@ class Task {
     public String toString() {
         return "Task[" + id + "]";
     }
+
 }
 
 /**
@@ -104,6 +127,7 @@ class Producer implements Runnable {
  * @author Watony Weng
  * @date 2018/12/03
  */
+
 public class BlockingQueueApp {
 
     public static void main(String[] args) {
@@ -116,4 +140,5 @@ public class BlockingQueueApp {
             scheduledExecutorService.execute(new Consumer(buffer));
         }
     }
+
 }

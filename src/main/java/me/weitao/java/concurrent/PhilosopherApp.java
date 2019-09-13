@@ -15,18 +15,22 @@ import java.util.concurrent.*;
 
 @Slf4j
 class AppContext {
+
     /**
      * 叉子数量(资源)
      */
     static final int NUM_OF_FORKS = 5;
+
     /**
      * 哲学家数量(线程)
      */
     static final int NUM_OF_PHILO = 5;
+
     /**
      * 叉子的信号量
      */
     static Semaphore[] forks;
+
     /**
      * 哲学家的信号量
      */
@@ -74,6 +78,7 @@ class AppContext {
             forks[index].release();
         }
     }
+
 }
 
 /**
