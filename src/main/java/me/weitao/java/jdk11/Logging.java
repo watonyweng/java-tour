@@ -81,4 +81,5 @@ public interface Logging {
     static void closeConnection() {
         logger.info("Close Database Connection");
     }
+
 }

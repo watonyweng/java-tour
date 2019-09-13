@@ -44,4 +44,5 @@ public class CollectionFactoryMethods {
             logger.debug(MessageFormat.format("AbstractMap is {0}", entryMap));
         }
     }
+
 }

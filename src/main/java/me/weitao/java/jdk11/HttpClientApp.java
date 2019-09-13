@@ -28,10 +28,10 @@ public class HttpClientApp {
      * @throws InterruptedException 中断异常
      */
     public static void main(String[] args) throws IOException, InterruptedException {
-        var request = HttpRequest.newBuilder()
+        HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create("https://javastack.cn"))
                 .build();
-        var client = HttpClient.newHttpClient();
+        HttpClient client = HttpClient.newHttpClient();
         HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
         if (logger.isDebugEnabled()) {
             logger.debug(MessageFormat.format("Response Content : {0}", response.body()));

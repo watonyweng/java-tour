@@ -73,4 +73,5 @@ public class ForkJoinApp extends RecursiveTask<Integer> {
         ForkJoinTask<Integer> result = forkJoinPool.submit(forkJoinApp);
         log.info(MessageFormat.format("result => {0}", result.get()));
     }
+
 }

@@ -1,4 +1,4 @@
-FROM openjdk:8-jre
+FROM openjdk:11.0.4-jre
 
 ADD target/lib /usr/share/java/lib
 

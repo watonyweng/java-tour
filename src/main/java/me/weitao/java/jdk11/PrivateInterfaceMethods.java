@@ -22,4 +22,5 @@ public class PrivateInterfaceMethods {
         logMySQL.logError("Error");
         logMySQL.logFatal("Fatal");
     }
+
 }

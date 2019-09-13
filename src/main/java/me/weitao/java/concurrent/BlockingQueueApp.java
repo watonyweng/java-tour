@@ -6,6 +6,13 @@ import java.text.MessageFormat;
 import java.util.UUID;
 import java.util.concurrent.*;
 
+/**
+ * 常量类
+ *
+ * @author Watony Weng
+ * @date 2019/09/13
+ */
+
 class Constants {
     static final int MAX_BUFFER_SIZE = 10;
     static final int NUM_OF_PRODUCER = 2;
@@ -18,6 +25,7 @@ class Constants {
  * @author Watony Weng
  * @date 2018/12/03
  */
+
 class Task {
     /**
      * 任务编号

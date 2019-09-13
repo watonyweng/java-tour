@@ -16,4 +16,5 @@ public class ThreadApp {
         ThreadDemo threadDemo2 = new ThreadDemo("Thread-2");
         threadDemo2.start();
     }
+
 }

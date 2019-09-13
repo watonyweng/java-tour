@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import static java.util.stream.IntStream.iterate;
 
 /**
- * 流的基本使用
+ * 流API的基本使用
  *
  * @author Watony Weng
  * @date 2018/11/30
@@ -35,4 +35,5 @@ public class StreamApiApp {
             logger.info(MessageFormat.format("result count -> {0}", count));
         }
     }
+
 }

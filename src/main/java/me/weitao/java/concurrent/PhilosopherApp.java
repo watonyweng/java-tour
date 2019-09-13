@@ -15,6 +15,7 @@ import java.util.concurrent.*;
 
 @Slf4j
 class AppContext {
+
     /**
      * 叉子数量(资源)
      */
@@ -74,6 +75,7 @@ class AppContext {
             forks[index].release();
         }
     }
+
 }
 
 /**
@@ -85,6 +87,7 @@ class AppContext {
 
 @Slf4j
 class Philosopher implements Runnable {
+
     /**
      * 编号
      */
@@ -116,6 +119,7 @@ class Philosopher implements Runnable {
             }
         }
     }
+
 }
 
 /**
@@ -125,6 +129,7 @@ class Philosopher implements Runnable {
  * @date 2018/12/03
  */
 public class PhilosopherApp {
+
     /**
      * 主函数
      *
@@ -144,4 +149,5 @@ public class PhilosopherApp {
             threadPoolExecutor.execute(new Philosopher(i, names[i]));
         }
     }
+    
 }

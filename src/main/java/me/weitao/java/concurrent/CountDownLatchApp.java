@@ -15,6 +15,7 @@ import java.util.concurrent.*;
 
 @Slf4j
 class Worker {
+
     /**
      * 名字
      */
@@ -46,6 +47,7 @@ class Worker {
         }
         log.info(MessageFormat.format("{0} has finished the job...", name));
     }
+
 }
 
 /**
@@ -72,6 +74,7 @@ class WorkerThread implements Runnable {
         // 工作完成后倒计时次数减1
         cdLatch.countDown();
     }
+
 }
 
 /**
@@ -126,4 +129,5 @@ public class CountDownLatchApp {
             Thread.currentThread().interrupt();
         }
     }
+
 }

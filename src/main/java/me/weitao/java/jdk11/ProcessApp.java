@@ -36,4 +36,5 @@ public class ProcessApp {
             logger.info(MessageFormat.format("User: {0}", info.user().orElse(np)));
         }
     }
+
 }

@@ -7,7 +7,6 @@ package me.weitao.java.jdk11;
  * @date 2018/11/30
  */
 
-
 public enum DatabaseType {
     /**
      * MySQL类型

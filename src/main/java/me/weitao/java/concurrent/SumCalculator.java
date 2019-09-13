@@ -71,5 +71,6 @@ public class SumCalculator implements Callable<Long> {
         }
         return sum;
     }
+
 }
 

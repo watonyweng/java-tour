@@ -14,7 +14,7 @@ import java.util.concurrent.ExecutionException;
 
 @Slf4j
 public class ConcurrentApp {
-    
+
     public static void main(String[] args) {
         int[] arrays = new int[]{1, 22, 33, 4, 52, 61, 7, 48, 10, 11};
         long sum = 0;
@@ -25,4 +25,5 @@ public class ConcurrentApp {
         }
         log.info(MessageFormat.format("sum -> {0}", sum));
     }
+
 }

@@ -17,4 +17,5 @@ final class LogMySql implements Logging {
             logger.info(MessageFormat.format("Message is {0} for {1}", message, DatabaseType.MysqlDb));
         }
     }
+
 }
