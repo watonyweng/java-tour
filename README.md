@@ -1,4 +1,4 @@
-# jnf-tour
+# jnf-guide
 
 This project was generated with [java](https://openjdk.java.net) using [maven](https://github.com/apache/maven).
 
@@ -14,8 +14,8 @@ This project was generated with [java](https://openjdk.java.net) using [maven](h
 
 ## Installation
 
-- git clone <https://github.com/watonyweng/jnf-tour.git>
-- cd jnf-tour && mvn clean install
+- git clone <https://github.com/watonyweng/jnf-guide.git>
+- cd jnf-guide && mvn clean install
 
 ## Compile
 
@@ -31,4 +31,4 @@ This project was generated with [java](https://openjdk.java.net) using [maven](h
 
 ## License
 
-- jnf-tour is released under an [MIT](https://opensource.org/licenses/MIT) license. See [LICENSE](https://github.com/watonyweng/jnf-tour/tree/master/LICENSE) for more information.
+- jnf-guide is released under an [MIT](https://opensource.org/licenses/MIT) license. See [LICENSE](https://github.com/watonyweng/jnf-guide/tree/master/LICENSE) for more information.
