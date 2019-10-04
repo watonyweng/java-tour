@@ -3,49 +3,58 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>me.weitao.java</groupId>
-    <artifactId>jnf-tour</artifactId>
+    <artifactId>jnf-guide</artifactId>
     <version>1.0.0-SNAPSHOT</version>
-    <name>jnf-tour</name>
+    <name>jnf-guide</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <dockerfile.version>1.4.12</dockerfile.version>
+        <logback.classic.version>1.2.3</logback.classic.version>
+        <guava.version>28.1-jre</guava.version>
+        <lombok.version>1.18.10</lombok.version>
+        <junit.platform.launcher.version>1.5.2</junit.platform.launcher.version>
+        <junit.jupiter.engine.version>5.5.2</junit.jupiter.engine.version>
+        <junit.vintage.engine.version>5.5.2</junit.vintage.engine.version>
+        <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
+        <maven.dependency.plugin.version>3.1.1</maven.dependency.plugin.version>
+        <dockerfile.maven.plugin.version>1.4.12</dockerfile.maven.plugin.version>
+        <repository>jnfguide</repository>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <version>1.2.3</version>
+            <version>${logback.classic.version}</version>
         </dependency>
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>28.1-jre</version>
+            <version>${guava.version}</version>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.10</version>
+            <version>${lombok.version}</version>
         </dependency>
         <dependency>
             <groupId>org.junit.platform</groupId>
             <artifactId>junit-platform-launcher</artifactId>
-            <version>1.5.2</version>
+            <version>${junit.platform.launcher.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.2.0</version>
+            <version>${junit.jupiter.engine.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.vintage</groupId>
             <artifactId>junit-vintage-engine</artifactId>
-            <version>5.2.0</version>
+            <version>${junit.vintage.engine.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -54,7 +63,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>${maven.compiler.plugin.version}</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -63,7 +72,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.1</version>
+                <version>${maven.dependency.plugin.version}</version>
                 <executions>
                     <execution>
                         <phase>initialize</phase>
@@ -81,7 +90,7 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>dockerfile-maven-plugin</artifactId>
-                <version>${dockerfile.version}</version>
+                <version>${dockerfile.maven.plugin.version}</version>
                 <executions>
                     <execution>
                         <id>default</id>
@@ -92,7 +101,7 @@
                     </execution>
                 </executions>
                 <configuration>
-                    <repository>jnfguide</repository>
+                    <repository>${repository}</repository>
                     <tag>${project.version}</tag>
                     <buildArgs>
                         <JAR_FILE>${project.build.finalName}.jar</JAR_FILE>

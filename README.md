@@ -9,8 +9,8 @@ This project was generated with [java](https://openjdk.java.net) using [maven](h
 
 ## Minimum Requirements
 
-- JDK 1.8+ 
-- Git 2.0+
+[![Platform Support](https://img.shields.io/badge/JDK-1.8+-green)](https://openjdk.java.net)
+[![Platform Support](https://img.shields.io/badge/Git-2.0+-green)](https://git-scm.com)
 
 ## Installation
 
