@@ -3,7 +3,6 @@ package me.weitao.java.concurrent;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
 import java.util.concurrent.*;
 
 /**
@@ -24,7 +23,7 @@ class AppContext {
     /**
      * 哲学家数量(线程)
      */
-    static final int NUM_OF_PHILO = 5;
+    static final int NUM_OF_PHILOSOPHERS = 5;
 
     /**
      * 叉子的信号量
@@ -43,7 +42,7 @@ class AppContext {
             forks[i] = new Semaphore(1);
         }
         // 如果有N个哲学家，最多只允许N-1人同时取叉子
-        counter = new Semaphore(NUM_OF_PHILO - 1);
+        counter = new Semaphore(NUM_OF_PHILOSOPHERS - 1);
     }
 
     /**
@@ -56,9 +55,9 @@ class AppContext {
     public static void putOnFork(int index, boolean leftFirst) throws InterruptedException {
         if (leftFirst) {
             forks[index].acquire();
-            forks[(index + 1) % NUM_OF_PHILO].acquire();
+            forks[(index + 1) % NUM_OF_PHILOSOPHERS].acquire();
         } else {
-            forks[(index + 1) % NUM_OF_PHILO].acquire();
+            forks[(index + 1) % NUM_OF_PHILOSOPHERS].acquire();
             forks[index].acquire();
         }
     }
@@ -72,9 +71,9 @@ class AppContext {
     public static void putDownFork(int index, boolean leftFirst) {
         if (leftFirst) {
             forks[index].release();
-            forks[(index + 1) % NUM_OF_PHILO].release();
+            forks[(index + 1) % NUM_OF_PHILOSOPHERS].release();
         } else {
-            forks[(index + 1) % NUM_OF_PHILO].release();
+            forks[(index + 1) % NUM_OF_PHILOSOPHERS].release();
             forks[index].release();
         }
     }
@@ -106,20 +105,20 @@ class Philosopher implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        do {
             try {
                 AppContext.counter.acquire();
                 boolean leftFirst = index % 2 == 0;
                 AppContext.putOnFork(index, leftFirst);
                 // 取到两个叉子就可以进食
-                log.info(MessageFormat.format("{0}正在吃意大利面（通心粉）...", name));
+                log.info("{}正在吃意大利面（通心粉）...", name);
                 AppContext.putDownFork(index, leftFirst);
                 AppContext.counter.release();
             } catch (InterruptedException e) {
                 log.error(e.getLocalizedMessage());
                 Thread.currentThread().interrupt();
             }
-        }
+        } while (true);
     }
 }
 

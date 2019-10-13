@@ -3,7 +3,6 @@ package me.weitao.java.concurrent;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
 import java.util.List;
 import java.util.concurrent.*;
 
@@ -18,7 +17,6 @@ import java.util.concurrent.*;
 class RandomThread implements Runnable {
 
     private List<Double> list;
-    private final int SIZE = 10000;
 
     public RandomThread(List<Double> list) {
         this.list = list;
@@ -26,10 +24,11 @@ class RandomThread implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < SIZE; ++i) {
+        int size = 10000;
+        for (int i = 0; i < size; ++i) {
             double random = Math.random();
             list.add(random);
-            log.info(MessageFormat.format("random => {0}", random));
+            log.info("random => {}", random);
         }
     }
 

@@ -2,7 +2,6 @@ package me.weitao.java.concurrent;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -23,7 +22,7 @@ public class ConcurrentApp {
         } catch (ExecutionException e) {
             log.error(e.getLocalizedMessage());
         }
-        log.info(MessageFormat.format("sum -> {0}", sum));
+        log.info("sum -> {}", sum);
     }
 
 }

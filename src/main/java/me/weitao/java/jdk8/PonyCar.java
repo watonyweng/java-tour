@@ -6,6 +6,7 @@ package me.weitao.java.jdk8;
  * @author Watony Weng
  * @date 2018/12/01
  */
+
 class PonyCar implements Vehicle, FourWheeler {
 
     @Override

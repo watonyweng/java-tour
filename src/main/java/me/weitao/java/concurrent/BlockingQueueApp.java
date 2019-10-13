@@ -2,7 +2,7 @@ package me.weitao.java.concurrent;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
+
 import java.util.UUID;
 import java.util.concurrent.*;
 
@@ -75,16 +75,16 @@ class Consumer implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        do {
             try {
                 Task task = buffer.take();
-                log.info(MessageFormat.format("Consumer[{0}] get {1}",
-                        Thread.currentThread().getName(), task));
+                log.info("Consumer[{}] get {}",
+                        Thread.currentThread().getName(), task);
             } catch (InterruptedException e) {
                 log.error(e.getLocalizedMessage());
                 Thread.currentThread().interrupt();
             }
-        }
+        } while (true);
     }
 }
 
@@ -106,17 +106,17 @@ class Producer implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
+        do {
             try {
                 Task task = new Task();
                 buffer.put(task);
-                log.info(MessageFormat.format("Producer[{0}] put {1}",
-                        Thread.currentThread().getName(), task));
+                log.info("Producer[{}] put {}",
+                        Thread.currentThread().getName(), task);
             } catch (InterruptedException e) {
                 log.error(e.getLocalizedMessage());
                 Thread.currentThread().interrupt();
             }
-        }
+        } while (true);
     }
 
 }
@@ -132,7 +132,8 @@ public class BlockingQueueApp {
 
     public static void main(String[] args) {
         BlockingQueue<Task> buffer = new LinkedBlockingQueue<>(Constants.MAX_BUFFER_SIZE);
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(Constants.NUM_OF_CONSUMER + Constants.NUM_OF_PRODUCER);
+        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(
+                Constants.NUM_OF_CONSUMER + Constants.NUM_OF_PRODUCER);
         for (int i = 1; i <= Constants.NUM_OF_PRODUCER; ++i) {
             scheduledExecutorService.execute(new Producer(buffer));
         }

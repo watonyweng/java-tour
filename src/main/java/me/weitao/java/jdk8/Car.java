@@ -1,9 +1,6 @@
 package me.weitao.java.jdk8;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.text.MessageFormat;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 汽车类
@@ -12,30 +9,30 @@ import java.text.MessageFormat;
  * @date 2018/12/01
  */
 
-class Car {
+@Slf4j
+public class Car {
 
-    private static final Logger logger = LoggerFactory.getLogger(Car.class);
 
     protected static Car create(final Supplier<Car> supplier) {
         return supplier.get();
     }
 
     protected static void collide(final Car car) {
-        if (logger.isInfoEnabled()) {
-            logger.info(MessageFormat.format("Collided {0}", car.toString()));
+        if (log.isInfoEnabled()) {
+            log.info("Collided {}", car.toString());
         }
     }
 
     protected void follow(final Car another) {
-        if (logger.isInfoEnabled()) {
-            logger.info(MessageFormat.format("Following the {0}", another.toString()));
+        if (log.isInfoEnabled()) {
+            log.info("Following the {}", another.toString());
         }
 
     }
 
     protected void repair() {
-        if (logger.isInfoEnabled()) {
-            logger.info(MessageFormat.format("Repaired {0}", this.toString()));
+        if (log.isInfoEnabled()) {
+            log.info("Repaired {}", this.toString());
         }
     }
 

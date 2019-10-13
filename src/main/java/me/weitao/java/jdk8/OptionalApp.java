@@ -1,9 +1,7 @@
 package me.weitao.java.jdk8;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
 import java.util.Optional;
 
 /**
@@ -13,21 +11,19 @@ import java.util.Optional;
  * @date 2018/12/01
  */
 
+@Slf4j
 public class OptionalApp {
 
-    private static final Logger logger = LoggerFactory.getLogger(OptionalApp.class);
-
     public static void main(String[] args) {
-        Integer value1 = null;
         Integer value2 = 10;
         // Optional.ofNullable - 允许传递为Null参数
-        Optional<Integer> a = Optional.ofNullable(value1);
+        Optional<Integer> a = Optional.empty();
 
         // Optional.of - 如果传递的参数是Null，抛出异常NullPointerException
         Optional<Integer> b = Optional.of(value2);
         Integer result = OptionalApp.sum(a, b);
-        if (logger.isInfoEnabled()) {
-            logger.info(MessageFormat.format("Calculation Result: {0}", result.intValue()));
+        if (log.isInfoEnabled()) {
+            log.info("Calculation Result = {}", result);
         }
     }
 
@@ -40,9 +36,9 @@ public class OptionalApp {
      */
     private static Integer sum(Optional<Integer> a, Optional<Integer> b) {
         // Optional.isPresent - 判断值是否存在
-        if (logger.isInfoEnabled()) {
-            logger.info(MessageFormat.format("第一个参数值存在: {0}", a.isPresent()));
-            logger.info(MessageFormat.format("第二个参数值存在: {0}", b.isPresent()));
+        if (log.isInfoEnabled()) {
+            log.info("第一个参数值存在 {}", a.isPresent());
+            log.info("第二个参数值存在 {}", b.isPresent());
         }
 
         // Optional.orElse - 如果值存在，返回它，否则返回默认值

@@ -3,7 +3,6 @@ package me.weitao.java.concurrent;
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
 import java.util.concurrent.*;
 
 /**
@@ -20,7 +19,7 @@ class Worker {
      * 名字
      */
     private String name;
-    
+
     /**
      * 工作持续时间
      */
@@ -38,7 +37,7 @@ class Worker {
      * 完成工作
      */
     public void doWork() {
-        log.info(MessageFormat.format("{0} begins to work...", name));
+        log.info("{} begins to work...", name);
         try {
             // 用休眠模拟工作执行的时间
             Thread.sleep(workDuration);
@@ -46,7 +45,7 @@ class Worker {
             log.error(ex.getLocalizedMessage());
             Thread.currentThread().interrupt();
         }
-        log.info(MessageFormat.format("{0} has finished the job...", name));
+        log.info("{} has finished the job...", name);
     }
 }
 

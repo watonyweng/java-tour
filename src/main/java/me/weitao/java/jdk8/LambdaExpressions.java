@@ -1,9 +1,6 @@
 package me.weitao.java.jdk8;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.text.MessageFormat;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * Lambda表达式
@@ -12,9 +9,8 @@ import java.text.MessageFormat;
  * @date 2018/12/01
  */
 
+@Slf4j
 public class LambdaExpressions {
-
-    private static final Logger logger = LoggerFactory.getLogger(LambdaExpressions.class);
 
     /**
      * 数字操作
@@ -42,6 +38,12 @@ public class LambdaExpressions {
         void sayMessage(String message);
     }
 
+    /**
+     * @param a             操作数
+     * @param b             操作数
+     * @param mathOperation 操作对象
+     * @return result 结果
+     */
     private static int operate(int a, int b, MathOperation mathOperation) {
         return mathOperation.operation(a, b);
     }
@@ -55,31 +57,29 @@ public class LambdaExpressions {
         MathOperation subtraction = (a, b) -> a - b;
 
         // 大括号中的返回语句
-        MathOperation multiplication = (int a, int b) -> {
-            return a * b;
-        };
+        MathOperation multiplication = (int a, int b) -> a * b;
 
         // 没有大括号及返回语句
         MathOperation division = (int a, int b) -> a / b;
-        if (logger.isInfoEnabled()) {
-            logger.info(MessageFormat.format("10 + 5 = {0}", LambdaExpressions.operate(10, 5, addition)));
-            logger.info(MessageFormat.format("10 - 5 = {0}", LambdaExpressions.operate(10, 5, subtraction)));
-            logger.info(MessageFormat.format("10 x 5 = {0}", LambdaExpressions.operate(10, 5, multiplication)));
-            logger.info(MessageFormat.format("10 / 5 = {0}", LambdaExpressions.operate(10, 5, division)));
+        if (log.isInfoEnabled()) {
+            log.info("10 + 5 = {}", LambdaExpressions.operate(10, 5, addition));
+            log.info("10 - 5 = {}", LambdaExpressions.operate(10, 5, subtraction));
+            log.info("10 x 5 = {}", LambdaExpressions.operate(10, 5, multiplication));
+            log.info("10 / 5 = {}", LambdaExpressions.operate(10, 5, division));
         }
 
         // 不使用括号
         GreetingService greetService1 = message -> {
-            if (logger.isInfoEnabled()) {
-                logger.info(MessageFormat.format("Hello {0}", message));
+            if (log.isInfoEnabled()) {
+                log.info("Hello {}", message);
             }
         };
 
 
         // 使用括号
         GreetingService greetService2 = (message) -> {
-            if (logger.isInfoEnabled()) {
-                logger.info(MessageFormat.format("Hello {0}", message));
+            if (log.isInfoEnabled()) {
+                log.info("Hello {}", message);
             }
         };
 

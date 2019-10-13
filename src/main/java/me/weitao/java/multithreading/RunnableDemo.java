@@ -1,8 +1,12 @@
 package me.weitao.java.multithreading;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadFactory;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Runnable接口实现多线程
@@ -15,9 +19,14 @@ import java.text.MessageFormat;
 class RunnableDemo implements Runnable {
 
     /**
-     * 线程对象
+     * 线程数量
      */
-    private Thread thread;
+    private static final int THREAD_COUNT = 4;
+
+    /**
+     * 线程池大小
+     */
+    private static final int THREAD_POOL_SIZE = 2;
 
     /**
      * 线程名称
@@ -31,31 +40,39 @@ class RunnableDemo implements Runnable {
      */
     RunnableDemo(String name) {
         threadName = name;
-        log.info(MessageFormat.format("Creating {0}", threadName));
+        log.info("Creating {}", threadName);
     }
 
     @Override
     public void run() {
-        log.info(MessageFormat.format("Running {0}", threadName));
+        log.info("Running {}", threadName);
         try {
-            for (int i = 4; i > 0; i--) {
-                log.info(MessageFormat.format("Thread: {0} => {1}", threadName, i));
+            for (int i = THREAD_COUNT; i > 0; i--) {
+                log.info("Thread: {} => {}", threadName, i);
                 // 让线程睡眠一会
                 Thread.sleep(50);
             }
         } catch (InterruptedException e) {
-            log.error(MessageFormat.format("Thread {0} interrupted.", threadName));
+            log.error("Thread {} interrupted.", threadName);
             Thread.currentThread().interrupt();
         }
-        log.info(MessageFormat.format("Thread {0} exiting.", threadName));
+        log.info("Thread {} exiting.", threadName);
     }
 
     public void start() {
-        log.info(MessageFormat.format("Starting {0}", threadName));
-        if (thread == null) {
-            thread = new Thread(this, threadName);
-            thread.start();
+        log.info("Starting {}", threadName);
+        // 创建线程工厂
+        ThreadFactory threadFactory = new ThreadFactoryBuilder()
+                .setNameFormat("thread-pool-%d").build();
+        // 创建线程池
+        ThreadPoolExecutor threadPoolExecutor = new ThreadPoolExecutor(THREAD_POOL_SIZE, 10,
+                5, TimeUnit.SECONDS, new SynchronousQueue<>(), threadFactory);
+        for (int i = 0; i < THREAD_POOL_SIZE; i++) {
+            // 执行线程
+            threadPoolExecutor.execute(new RunnableDemo(threadName));
         }
+        // 关闭线程池
+        threadPoolExecutor.shutdown();
     }
 
 }

@@ -2,7 +2,6 @@ package me.weitao.java.multithreading;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
 import java.util.concurrent.Callable;
 
 /**
@@ -22,7 +21,7 @@ public class CallableDemo implements Callable<Integer> {
         int i = 0;
         for (; i < SIZE; i++) {
             if (log.isInfoEnabled()) {
-                log.info(MessageFormat.format("{0} -> {1}", Thread.currentThread().getName(), i));
+                log.info("{} => {}", Thread.currentThread().getName(), i);
             }
         }
         return i;

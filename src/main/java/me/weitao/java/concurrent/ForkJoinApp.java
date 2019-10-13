@@ -2,7 +2,6 @@ package me.weitao.java.concurrent;
 
 import lombok.extern.slf4j.Slf4j;
 
-import java.text.MessageFormat;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.ForkJoinTask;
@@ -38,7 +37,7 @@ public class ForkJoinApp extends RecursiveTask<Integer> {
     protected Integer compute() {
         int sum = 0;
         count++;
-        log.info(MessageFormat.format("开启了一条线程单独干 => {0}", count++));
+        log.info("开启了一条线程单独干 => {}", count++);
         // 如果任务足够小,就直接执行
         boolean canCompute;
         canCompute = (end - start) <= threshold;
@@ -71,7 +70,7 @@ public class ForkJoinApp extends RecursiveTask<Integer> {
         ForkJoinApp forkJoinApp = new ForkJoinApp(1, 100);
 
         ForkJoinTask<Integer> result = forkJoinPool.submit(forkJoinApp);
-        log.info(MessageFormat.format("result => {0}", result.get()));
+        log.info("result => {}", result.get());
     }
 
 }

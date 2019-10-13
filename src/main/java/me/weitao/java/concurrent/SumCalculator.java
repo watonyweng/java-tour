@@ -19,7 +19,7 @@ public class SumCalculator implements Callable<Long> {
     private int[] numbers;
     private int start;
     private int end;
-    private List<FutureTask<Long>> tasks = new ArrayList<FutureTask<Long>>();
+    private List<FutureTask<Long>> tasks = new ArrayList<>();
     private ExecutorService executor;
 
     public SumCalculator(final int[] numbers, int start, int end) {
