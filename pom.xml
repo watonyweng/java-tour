@@ -18,7 +18,7 @@
         <junit.jupiter.engine.version>5.6.0</junit.jupiter.engine.version>
         <junit.vintage.engine.version>5.6.0</junit.vintage.engine.version>
         <maven.compiler.plugin.version>3.8.1</maven.compiler.plugin.version>
-        <maven.dependency.plugin.version>3.1.1</maven.dependency.plugin.version>
+        <maven.dependency.plugin.version>3.1.2</maven.dependency.plugin.version>
         <dockerfile.maven.plugin.version>1.4.13</dockerfile.maven.plugin.version>
         <repository>jnfguide</repository>
     </properties>
